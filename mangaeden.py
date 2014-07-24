@@ -3,6 +3,8 @@ import json
 
 # doc reference: https://www.mangaeden.com/api/
 
+# variables
+
 # manga info api url, see documentation
 mangainfo_api_url = "https://www.mangaeden.com/api/manga/"
 # manga info api url, see documentation
@@ -13,8 +15,10 @@ manga_id = '4e70e9efc092255ef7004251'
 manga_title = 'Gantz'
 # image prefix
 img_prefix = 'https://cdn.mangaeden.com/mangasimg/'
+# last image
+last_image = 2133
 # counter for downloaded image
-counter = 1
+counter = 0
 
 api_mangainfo = urllib.urlopen(mangainfo_api_url + manga_id + "/")
 json_mangainfo = api_mangainfo.read()
@@ -31,6 +35,12 @@ for mangainfo in reversed(list_mangainfo['chapters']):
     # iterate images, it is in a reversed order
     for chapterinfo in reversed(list_chapterinfo['images']):
 
+        # increment image counter
+        counter = counter + 1
+
+        if counter < last_image:
+            continue
+
         # array index [3] = image url. see documentation
         image_url = img_prefix + str(chapterinfo[1])
         image_name = str(counter).zfill(7) + '.jpg'
@@ -39,6 +49,3 @@ for mangainfo in reversed(list_mangainfo['chapters']):
 
         # download image
         urllib.urlretrieve(image_url, manga_title + '/' + image_name)
-
-        # increment image counter
-        counter = counter + 1
