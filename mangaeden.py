@@ -6,18 +6,19 @@ import os
 
 # variables
 
+# manga id, can be retrieved by checking the web page's source code
+manga_id = '4e70e9efc092255ef7004251'
+# to start download from specific chapter
+start_from_chapter = 30
+
 # manga info api url, see documentation
 mangainfo_api_url = "https://www.mangaeden.com/api/manga/"
 # manga info api url, see documentation
 chapterinfo_api_url = "https://www.mangaeden.com/api/chapter/"
-# manga id, can be retrieved by checking the web page's source code
-manga_id = '4e70e9efc092255ef7004251'
 # image prefix
 img_prefix = 'https://cdn.mangaeden.com/mangasimg/'
 # directory prefix for downloaded images
 dir_prefix = 'download/'
-# to start download from specific chapter
-start_from_chapter = 30
 
 api_mangainfo = urllib.urlopen(mangainfo_api_url + manga_id + "/")
 json_mangainfo = api_mangainfo.read()
